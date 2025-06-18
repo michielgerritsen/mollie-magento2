@@ -41,10 +41,6 @@ jobs:
             })
 
   e2e-tests:
-    needs:
-      - secrets-gate
-    # Only run this job if the secret is set
-    if: needs.secrets-gate.outputs.is-secret-set == 'true'
     strategy:
       fail-fast: false
       matrix:

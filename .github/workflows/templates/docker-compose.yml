@@ -2,7 +2,7 @@ version: '3'
 
 services:
   magento:
-    image: michielgerritsen/magento-project-community-edition:${PHP_VERSION}-magento${MAGENTO_VERSION}-sample-data
+    image: michielgerritsen/magento-project-community-edition:${PHP_VERSION}-magento${MAGENTO_VERSION}-sample-data-debug
     container_name: magento-project-community-edition
     environment:
       - VIRTUAL_HOST=magento.test

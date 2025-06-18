@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Start Docker
-        run: docker run --detach --name magento-project-community-edition michielgerritsen/magento-project-community-edition:${{ matrix.PHP_VERSION }}-magento${{ matrix.MAGENTO_VERSION }}
+        run: docker run --detach --name magento-project-community-edition michielgerritsen/magento-project-community-edition:${{ matrix.PHP_VERSION }}-magento${{ matrix.MAGENTO_VERSION }}-debug
 
       - name: Remove version from composer.json
         run: sed -i '/version/d' ./composer.json
