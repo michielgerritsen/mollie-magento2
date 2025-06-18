@@ -1,12 +1,6 @@
 name: End-2-end
 on:
   push:
-    tags:
-      - '*'
-  pull_request:
-    types:
-      - opened
-      - labeled
 
 concurrency: e2e-tests
 
