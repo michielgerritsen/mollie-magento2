@@ -109,8 +109,8 @@ jobs:
 
       - name: Start all containers and check if we can reach Magento (and warmup cache)
         run: |
-          docker exec e2e curl -k -s -o /dev/null -w "%{http_code}" https://magento.test/
-          docker exec e2e curl -k -s -o /dev/null -w "%{http_code}" ${{ env.magento_url }}
+          docker exec e2e curl --fail-with-body https://magento.test/
+          docker exec e2e curl --fail-with-body ${{ env.magento_url }}
 
       - name: Run Cypress
         run: |
