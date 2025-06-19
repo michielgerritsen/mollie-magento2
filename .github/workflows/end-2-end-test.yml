@@ -75,6 +75,11 @@ jobs:
           MAGENTO_URL=$(docker exec magento-project-community-edition /bin/bash -c "curl -s ngrok:4040/api/tunnels |jq -r \".tunnels[0].public_url\"")
           echo "magento_url=$MAGENTO_URL" >> $GITHUB_ENV
 
+      - name: Start all containers and check if we can reach Magento (and warmup cache)
+        run: |
+          docker exec e2e curl --fail-with-body -k https://magento.test/
+          docker exec e2e curl --fail-with-body -k ${{ env.magento_url }}
+
       # Note the `mollie-pwa-*.html` files, as it is copied to the pub folder. This is so that it can be accessed by Cypress.
       - name: Upload the code into the docker container
         run: |
@@ -109,8 +114,8 @@ jobs:
 
       - name: Start all containers and check if we can reach Magento (and warmup cache)
         run: |
-          docker exec e2e curl --fail-with-body https://magento.test/
-          docker exec e2e curl --fail-with-body ${{ env.magento_url }}
+          docker exec e2e curl --fail-with-body -k https://magento.test/
+          docker exec e2e curl --fail-with-body -k ${{ env.magento_url }}
 
       - name: Run Cypress
         run: |
