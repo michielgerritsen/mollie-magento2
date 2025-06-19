@@ -77,6 +77,7 @@ jobs:
 
       - name: Start all containers and check if we can reach Magento (and warmup cache)
         run: |
+          docker logs magento-project-community-edition
           docker exec magento-project-community-edition curl -k http://localhost/
 
       # Note the `mollie-pwa-*.html` files, as it is copied to the pub folder. This is so that it can be accessed by Cypress.
