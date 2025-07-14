@@ -40,6 +40,11 @@
     <preference for="Mollie\Payment\Api\Data\IssuerInterface" type="Mollie\Payment\Model\Issuer" />
     <preference for="Mollie\Payment\Api\Data\TerminalInterface" type="Mollie\Payment\Model\Terminal" />
 
+    <preference for="Mollie\Payment\Api\SalesOrderPaymentMetaRepositoryInterface" type="Mollie\Payment\Model\SalesOrderPaymentMetaRepository" />
+    <preference for="Mollie\Payment\Api\SalesOrderPaymentMetaManagementInterface" type="Mollie\Payment\Model\SalesOrderPaymentMetaManagement"/>
+    <preference for="Mollie\Payment\Api\Data\SalesOrderPaymentMetaInterface" type="Mollie\Payment\Model\Data\SalesOrderPaymentMeta"/>
+    <preference for="Mollie\Payment\Api\Data\SalesOrderPaymentMetaSearchResultsInterface" type="Mollie\Payment\Model\SalesOrderPaymentPaymentMetaSearchResults"/>
+
     <preference for="Mollie\Payment\Api\Data\TransactionToProcessInterface" type="Mollie\Payment\Model\Queue\TransactionToProcess"/>
 
     <preference for="Mollie\Payment\Api\Data\PaymentLinkRedirectResultInterface" type="Mollie\Payment\Service\Magento\PaymentLinkRedirectResult"/>
@@ -300,6 +305,7 @@
                     <item name="add_additional_data" xsi:type="object">Mollie\Payment\Model\Client\Orders\Processors\AddAdditionalInformation</item>
                     <item name="save_card_label" xsi:type="object">Mollie\Payment\Model\Client\Orders\Processors\SaveCardDetails</item>
                     <item name="payment_link_save_payment_method" xsi:type="object">Mollie\Payment\Model\Client\Orders\Processors\PaymentLinkPaymentMethod</item>
+                    <item name="add_payment_meta" xsi:type="object">Mollie\Payment\Model\Client\Orders\Processors\AddPaymentMeta</item>
                 </item>
                 <item name="last_payment_status_is_failure" xsi:type="array">
                     <item name="last_payment_status_is_failure" xsi:type="object">Mollie\Payment\Model\Client\Orders\Processors\LastPaymentStatusIsFailure</item>
@@ -325,6 +331,7 @@
             <argument name="processors" xsi:type="array">
                 <item name="preprocess" xsi:type="array">
                     <item name="add_additional_data" xsi:type="object">Mollie\Payment\Model\Client\Payments\Processors\AddAdditionalInformation</item>
+                    <item name="add_payment_meta" xsi:type="object">Mollie\Payment\Model\Client\Payments\Processors\AddPaymentMeta</item>
                 </item>
                 <item name="failed" xsi:type="array">
                     <item name="failed" xsi:type="object">Mollie\Payment\Model\Client\Payments\Processors\FailedStatusProcessor</item>

@@ -67,4 +67,8 @@
             <argument name="urlBuilder" xsi:type="object">Magento\Framework\Url</argument>
         </arguments>
     </type>
+
+    <type name="Magento\Backend\Block\Widget\Grid">
+        <plugin name="mollie_join_meta" type="Mollie\Payment\Plugin\Backend\Block\Widget\Grid\AddMetaJoinToCollection" />
+    </type>
 </config>

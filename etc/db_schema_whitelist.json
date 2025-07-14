@@ -162,5 +162,19 @@
         "constraint": {
             "PRIMARY": true
         }
+    },
+    "mollie_payment_salesorderpaymentmeta": {
+        "column": {
+            "entity_id": true,
+            "parent_id": true,
+            "transaction_id": true,
+            "paypal_reference": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "MOLLIE_PAYMENT_SALESORDERPAYMENTMETA_PARENT_ID": true
+        }
     }
 }

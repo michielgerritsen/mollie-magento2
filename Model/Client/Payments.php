@@ -33,6 +33,7 @@ use Mollie\Payment\Service\Order\CancelOrder;
 use Mollie\Payment\Service\Order\OrderCommentHistory;
 use Mollie\Payment\Service\Order\ExpiredOrderToTransaction;
 use Mollie\Payment\Service\Order\SaveAdditionalInformationDetails;
+use Mollie\Payment\Service\Order\SavePaypalReference;
 use Mollie\Payment\Service\Order\SendOrderEmails;
 use Mollie\Payment\Service\Order\Transaction;
 use Mollie\Payment\Service\Order\TransactionProcessor;
@@ -149,6 +150,10 @@ class Payments extends AbstractModel
      * @var GetTransactionId
      */
     private $getTransactionId;
+    /**
+     * @var SavePaypalReference
+     */
+    private $savePaypalReference;
 
     public function __construct(
         OrderRepository $orderRepository,
@@ -172,7 +177,8 @@ class Payments extends AbstractModel
         ExpiredOrderToTransaction $expiredOrderToTransaction,
         CanRegisterCaptureNotification $canRegisterCaptureNotification,
         MethodCode $methodCode,
-        GetTransactionId $getTransactionId
+        GetTransactionId $getTransactionId,
+        SavePaypalReference $savePaypalReference
     ) {
         $this->orderRepository = $orderRepository;
         $this->checkoutSession = $checkoutSession;
@@ -196,6 +202,7 @@ class Payments extends AbstractModel
         $this->canRegisterCaptureNotification = $canRegisterCaptureNotification;
         $this->methodCode = $methodCode;
         $this->getTransactionId = $getTransactionId;
+        $this->savePaypalReference = $savePaypalReference;
     }
 
     /**
@@ -368,6 +375,7 @@ class Payments extends AbstractModel
             }
             if ($paymentData->details !== null) {
                 $this->saveAdditionalInformationDetails->execute($payment, $paymentData->details);
+                $this->savePaypalReference->execute($order, $paymentData);
             }
 
             if (!$payment->getIsTransactionClosed() &&
